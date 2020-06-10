@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  db:
+    image: mdillon/postgis:11-alpine
+    restart: on-failure
+    env_file: ../.envs/.env.dev
+    volumes:
+      - "./.postgrest/development/pgdata:/var/lib/postgresql/data"
+    ports:
+      - '5433:5432'
+
+
+  api:
+    build:
+      context: ../src
+      dockerfile: Dockerfile
+    volumes:
+      - "../src:/code"
+    restart: on-failure
+    env_file: ../.envs/.env.dev
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx
+    restart: on-failure
+    depends_on:
+      - api
+    volumes:
+      - "./nginx/dev.conf:/etc/nginx/conf.d/dev.conf"
+    ports:
+      - "81:81" #api
