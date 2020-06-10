@@ -29,7 +29,7 @@ MIDDLEWARE += []
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': os.environ.get("POSTGRES_DB", None),
         'USER': os.environ.get("POSTGRES_USER", None),
         'PASSWORD': os.environ.get("POSTGRES_PASSWORD", None),
