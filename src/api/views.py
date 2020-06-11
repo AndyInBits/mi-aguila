@@ -5,6 +5,7 @@ from django.contrib.gis.geos import Point
 from rest_framework.response import Response
 from .serializers import StartTripSerializer, EndTripSerializer, CountrySerializer, CitySerializer, PassengerSerializer, DriverSerializer, CarSerializer, TripSerializer
 from .models import StartTrip, EndTrip, Country, City, Passenger, Driver, Car, Trip
+from rest_framework.decorators import api_view, renderer_classes
 
 
 class StartTripViewset(viewsets.ModelViewSet):
@@ -71,6 +72,7 @@ class TripCityViewset(viewsets.ViewSet):
         return Response(cities)
 
 
+@api_view(('GET',))
 def load_data_json(request):
     import json
     json_path = settings.BASE_DIR + "/trips.json"
@@ -127,4 +129,4 @@ def load_data_json(request):
 
         )
 
-    return Response({"status": "ok"}, status=200)
+    return Response({"status": "ok", "data": data}, status=200)
