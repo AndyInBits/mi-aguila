@@ -1,7 +1,7 @@
 
 from django.urls import path, include
 from rest_framework import routers
-from .views import StartTripViewset, EndTripViewset, CountryViewset, CityViewset, PassengerViewset, DriverViewset, CarViewset, TripViewset, TripCountViewset, TripCityViewset
+from .views import StartTripViewset, EndTripViewset, CountryViewset, CityViewset, PassengerViewset, DriverViewset, CarViewset, TripViewset, TripCountViewset, TripCityViewset, load_data_json
 
 router = routers.DefaultRouter()
 router.register(r'start_trips', StartTripViewset)
@@ -18,4 +18,5 @@ router.register(r'city_trips', TripCityViewset,
 
 urlpatterns = [
     path('v1/', include(router.urls)),
+    path('v1/upload', load_data_json),
 ]
