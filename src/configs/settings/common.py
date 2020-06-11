@@ -60,7 +60,7 @@ DJANGO_APPS = [
 ]
 
 # others apps
-THIRD_PARTY_APPS = ['rest_framework']
+THIRD_PARTY_APPS = ['rest_framework', 'rest_framework_gis', ]
 # local apps
 LOCAL_APPS = ['api']
 

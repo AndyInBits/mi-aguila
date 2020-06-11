@@ -89,10 +89,21 @@ class Trip(models.Model):
     start = models.ForeignKey(StartTrip, on_delete=models.CASCADE)
     end = models.ForeignKey(EndTrip, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, related_name="trips",
+                             on_delete=models.CASCADE)
     passanger = models.ForeignKey(Passenger, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    created = models.DateTimeField(
+        'created at',
+        auto_now_add=True,
+        help_text='Date time on which the object was created.', null=True
+    )
+    modified = models.DateTimeField(
+        'modified at',
+        auto_now=True,
+        help_text='Date time on which the object was last modified.', null=True
+    )
 
     def __str__(self):
-        return "{}-{}".format(self.check_code, status)
+        return "{}-{}-{}".format(self.check_code, self.status, self.city.name)
