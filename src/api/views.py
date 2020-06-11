@@ -77,7 +77,6 @@ def load_data_json(request):
     with open(json_path, 'r') as JSON:
         data = json.load(JSON)["trips"]
     for trip in data:
-        print(trip["passenger"])
         start = StartTrip.objects.create(
             start_date=trip["start"]["date"]["$date"],
             pickup_address=trip["start"]["pickup_address"],
